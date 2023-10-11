@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Typing Game</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #game-container {
+            width: 400px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Typing Game</h1>
+    <div id="game-container">
+        <p id="word-display"></p>
+        <input type="text" id="input-word" autofocus>
+        <p>Score: <span id="score">0</span></p>
+    </div>
+
+    <script>
+        const words = ["apple", "banana", "cherry", "date", "elderberry", "fig", "grape", "honeydew", "kiwi", "lemon", "mango", "orange", "papaya", "quince", "raspberry", "strawberry", "tangerine", "watermelon"];
+        let currentWordIndex = 0;
+        let score = 0;
+
+        const wordDisplay = document.getElementById("word-display");
+        const inputWord = document.getElementById("input-word");
+        const scoreDisplay = document.getElementById("score");
+
+        // 開始時に最初の単語を表示
+        displayWord();
+
+        inputWord.addEventListener("input", checkInput);
+
+        function displayWord() {
+            const randomIndex = Math.floor(Math.random() * words.length);
+            currentWordIndex = randomIndex;
+            wordDisplay.textContent = words[randomIndex];
+            inputWord.value = "";
+        }
+
+        function checkInput() {
+            const typedWord = inputWord.value.toLowerCase();
+            const currentWord = words[currentWordIndex];
+
+            if (typedWord === currentWord) {
+                score++;
+                scoreDisplay.textContent = score;
+                displayWord();
+            }
+        }
+    </script>
+</body>
+</html>
